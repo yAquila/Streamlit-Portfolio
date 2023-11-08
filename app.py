@@ -4,6 +4,7 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 from st_clickable_images import clickable_images
 import webbrowser
+from streamlit.components.v1 import html
 
 # CONFIG
 
@@ -23,6 +24,13 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
+def open_page(url):
+    open_script= """
+        <script type="text/javascript">
+            window.open('%s', '_blank').focus();
+        </script>
+    """ % (url)
+    html(open_script)
 
 # ASSETS
 lottie_code_anim = load_lottie_anim("https://lottie.host/c1fd3860-ea0f-4ce2-975f-97f66d23a165/3Gp6qbiUIq.json")
@@ -151,8 +159,7 @@ def set_body():
                 st.subheader("Basic Mobile Portfolio")
                 st.write("A basic portfolio app template.")
                 st.write("2023")
-                if st.button("Github",type="secondary"):
-                    webbrowser.open("https://github.com/yAquila/Basic-Mobile-Portfolio")
+                st.button("Github",type="secondary", on_click=open_page, args=("https://github.com/yAquila/Basic-Mobile-Portfolio",))
             with divider1:
                 st.write("|")
             with i2:
@@ -189,7 +196,7 @@ def set_body():
 
             # st.markdown(f"Image #{clicked} clicked" if clicked > -1 else "No image clicked")
             if clicked > -1 and clicked!= 2:
-                webbrowser.open(["https://github.com/yAquila/", "mailto://yusufkartal2004@gmail.com", "", "https://twitter.com/yusufkartal2004"][clicked])
+                open_page(["https://github.com/yAquila/", "mailto://yusufkartal2004@gmail.com", "", "https://twitter.com/yusufkartal2004"][clicked])
             elif clicked == 2:
                 st.toast(":grey[Coming soon...]")
             # for i, s in enumerate(st.columns(5)):
