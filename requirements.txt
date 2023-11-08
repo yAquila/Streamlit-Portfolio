@@ -1,0 +1,5 @@
+streamlit-lottie
+st-clickable-images
+webbrowser
+requests
+pillow
